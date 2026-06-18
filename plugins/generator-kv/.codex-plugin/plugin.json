@@ -1,0 +1,39 @@
+{
+  "name": "generator-kv",
+  "version": "0.1.0",
+  "description": "Generate SoloMkt-KV campaign KV images from current public models.",
+  "author": {
+    "name": "SoloMkt-KV",
+    "url": "https://github.com/SoloMkt-KV"
+  },
+  "homepage": "https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw#readme",
+  "repository": "https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw.git",
+  "license": "MIT",
+  "keywords": [
+    "openclaw",
+    "generator-kv",
+    "solomkt-kv",
+    "kv",
+    "marketing",
+    "image-generation"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Generator-KV",
+    "shortDescription": "Generate marketing KV images with SoloMkt-KV.",
+    "longDescription": "Generator-KV helps users configure a SoloMkt-KV API key, fetch the latest public model list, choose a model, collect campaign details, and generate KV image URLs through natural-language guidance.",
+    "developerName": "SoloMkt-KV",
+    "category": "Image Generation",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw",
+    "defaultPrompt": [
+      "帮我配置 Generator-KV API Key",
+      "用 Generator-KV 生成活动主视觉",
+      "List Generator-KV models and create a campaign KV"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

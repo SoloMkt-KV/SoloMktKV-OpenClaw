@@ -1,0 +1,68 @@
+{
+  "name": "@solomkt-kv/generator-kv",
+  "version": "0.1.0",
+  "description": "OpenClaw tool plugin for generating SoloMkt-KV campaign KV images.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "SoloMkt-KV",
+    "url": "https://github.com/SoloMkt-KV"
+  },
+  "homepage": "https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SoloMkt-KV/SoloMktKV-OpenClaw/issues"
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "generator-kv",
+    "solomkt-kv",
+    "image-generation",
+    "marketing"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "scripts",
+    "plugins",
+    ".agents",
+    "openclaw.plugin.json",
+    "README.md",
+    "REMEND.MD",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "plugin:build": "npm run build && openclaw plugins build --entry ./dist/index.js",
+    "plugin:validate": "openclaw plugins validate --entry ./dist/index.js",
+    "configure-api-key": "node ./scripts/configure-api-key.mjs",
+    "generate-kv": "node ./scripts/generate-kv.mjs",
+    "smoke": "node ./scripts/smoke-check.mjs"
+  },
+  "dependencies": {
+    "typebox": "^1.1.38"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.5.17"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.5.17",
+      "minGatewayVersion": "2026.5.17"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
