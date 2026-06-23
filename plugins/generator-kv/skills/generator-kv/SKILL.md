@@ -1,4 +1,4 @@
----
+﻿---
 name: generator-kv
 description: Install, configure, verify, and guide first use of the Generator-KV OpenClaw plugin for activity KV/key visual poster generation. Use when a user asks OpenClaw to install or set up this KV poster plugin from GitHub, configure SoloMkt-KV API credentials, list available KV models, generate an activity KV poster, troubleshoot this plugin, or provides this SKILL.md link as the plugin setup guide.
 ---
@@ -19,7 +19,7 @@ Use this guide to install the Generator-KV plugin from GitHub source or the Solo
 - Entry file: `index.js`
 - Manifest file: `openclaw.plugin.json`
 - OpenClaw plugin API compatibility: `>=2026.3.24-beta.2`
-- Default SoloMkt-KV API base URL: `https://solosmart-uat.issmart.com.cn/solomkt_kv`
+- Default SoloMkt-KV API base URL: `https://api.kv.solomarketing.com.cn`
 - Generation timeout: `600000` ms (10 minutes)
 - Tools exposed by the plugin: `list_models`, `generate_image`
 
@@ -59,7 +59,7 @@ Then add Generator-KV to your project `openclaw.json`:
       "generator-kv": {
         "enabled": true,
         "config": {
-          "baseUrl": "https://solosmart-uat.issmart.com.cn/solomkt_kv",
+          "baseUrl": "https://api.kv.solomarketing.com.cn",
           "generationTimeoutMs": 600000
         }
       }
@@ -147,7 +147,7 @@ If OpenClaw CLI configuration is available, the following config keys can also b
 
 ```bash
 openclaw config set plugins.generator-kv.apiKey YOUR_API_KEY
-openclaw config set plugins.generator-kv.baseUrl https://solosmart-uat.issmart.com.cn/solomkt_kv
+openclaw config set plugins.generator-kv.baseUrl https://api.kv.solomarketing.com.cn
 openclaw config set plugins.generator-kv.generationTimeoutMs 600000
 ```
 

@@ -1,11 +1,11 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
-const DEFAULT_BASE_URL = "https://solosmart-uat.issmart.com.cn/solomkt_kv";
+const DEFAULT_BASE_URL = "https://api.kv.solomarketing.com.cn";
 const GENERATION_TIMEOUT_MS = 10 * 60 * 1000;
 
 function credentialsHome() {

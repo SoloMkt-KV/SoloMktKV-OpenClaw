@@ -1,11 +1,11 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 import { createInterface } from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
-const DEFAULT_BASE_URL = "https://solosmart-uat.issmart.com.cn/solomkt_kv";
+const DEFAULT_BASE_URL = "https://api.kv.solomarketing.com.cn";
 
 function credentialsHome() {
   return (

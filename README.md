@@ -1,4 +1,4 @@
-# Generator-KV
+﻿# Generator-KV
 
 Generator-KV is an OpenClaw plugin for generating campaign KV images with SoloMkt-KV models. It always fetches the latest model list first, asks the user to choose a model ID, collects the required campaign fields, and then submits a long-running KV generation request with a 10-minute HTTP timeout.
 
@@ -86,7 +86,7 @@ Add Generator-KV to your project `openclaw.json`:
       "generator-kv": {
         "enabled": true,
         "config": {
-          "baseUrl": "https://solosmart-uat.issmart.com.cn/solomkt_kv",
+          "baseUrl": "https://api.kv.solomarketing.com.cn",
           "generationTimeoutMs": 600000
         }
       }
@@ -164,14 +164,14 @@ npm run generate-kv
 Model list:
 
 ```text
-GET https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/models?type=all
+GET https://api.kv.solomarketing.com.cn/api/v1/models?type=all
 Header: x-api-key: <apiKey>
 ```
 
 Generation:
 
 ```text
-POST https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/generateKV
+POST https://api.kv.solomarketing.com.cn/api/v1/generateKV
 Header: x-api-key: <apiKey>
 Timeout: 600000 ms
 ```
@@ -312,7 +312,7 @@ npm run build
       "generator-kv": {
         "enabled": true,
         "config": {
-          "baseUrl": "https://solosmart-uat.issmart.com.cn/solomkt_kv",
+          "baseUrl": "https://api.kv.solomarketing.com.cn",
           "generationTimeoutMs": 600000
         }
       }
@@ -390,14 +390,14 @@ npm run generate-kv
 模型列表：
 
 ```text
-GET https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/models?type=all
+GET https://api.kv.solomarketing.com.cn/api/v1/models?type=all
 Header: x-api-key: <apiKey>
 ```
 
 生成 KV：
 
 ```text
-POST https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/generateKV
+POST https://api.kv.solomarketing.com.cn/api/v1/generateKV
 Header: x-api-key: <apiKey>
 Timeout: 600000 ms
 ```

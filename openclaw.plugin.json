@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "generator-kv",
   "name": "Generator-KV",
   "description": "Generate campaign KV images with SoloMkt-KV public models.",
@@ -18,7 +18,7 @@
       "baseUrl": {
         "type": "string",
         "description": "SoloMkt-KV API base URL.",
-        "default": "https://solosmart-uat.issmart.com.cn/solomkt_kv"
+        "default": "https://api.kv.solomarketing.com.cn"
       },
       "generationTimeoutMs": {
         "type": "number",

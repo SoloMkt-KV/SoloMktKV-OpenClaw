@@ -1,4 +1,4 @@
-# Generator-KV API Key Setup / API Key 安装说明
+﻿# Generator-KV API Key Setup / API Key 安装说明
 
 This file focuses on API key installation for the Generator-KV OpenClaw plugin.
 
@@ -42,7 +42,7 @@ npm run configure-api-key
 The setup helper saves the key and immediately validates it by calling:
 
 ```text
-GET https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/models?type=all
+GET https://api.kv.solomarketing.com.cn/api/v1/models?type=all
 ```
 
 If validation succeeds, the plugin is ready to use. If validation fails, check whether the API key is correct and whether the service is reachable from your network.
@@ -85,7 +85,7 @@ npm run configure-api-key
 配置脚本会保存 API Key，并自动调用模型列表接口进行校验：
 
 ```text
-GET https://solosmart-uat.issmart.com.cn/solomkt_kv/api/v1/models?type=all
+GET https://api.kv.solomarketing.com.cn/api/v1/models?type=all
 ```
 
 校验通过后即可使用插件。若校验失败，请检查 API Key 是否正确，以及当前网络是否可以访问 SoloMkt-KV 服务。
