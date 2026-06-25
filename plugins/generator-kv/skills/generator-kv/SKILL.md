@@ -1,4 +1,4 @@
-﻿---
+---
 name: generator-kv
 description: Install, configure, verify, and guide first use of the Generator-KV OpenClaw plugin for activity KV/key visual poster generation. Use when a user asks OpenClaw to install or set up this KV poster plugin from GitHub, configure SoloMkt-KV API credentials, list available KV models, generate an activity KV poster, troubleshoot this plugin, or provides this SKILL.md link as the plugin setup guide.
 ---
@@ -19,7 +19,7 @@ Use this guide to install the Generator-KV plugin from GitHub source or the Solo
 - Entry file: `index.js`
 - Manifest file: `openclaw.plugin.json`
 - OpenClaw plugin API compatibility: `>=2026.3.24-beta.2`
-- Default SoloMkt-KV API base URL: `https://api.kv.solomarketing.com.cn`
+- Default SoloMkt-KV API base URL: `https://kv.solomarketing.com.cn`
 - Generation timeout: `600000` ms (10 minutes)
 - Tools exposed by the plugin: `list_models`, `generate_image`
 
@@ -59,7 +59,7 @@ Then add Generator-KV to your project `openclaw.json`:
       "generator-kv": {
         "enabled": true,
         "config": {
-          "baseUrl": "https://api.kv.solomarketing.com.cn",
+          "baseUrl": "https://kv.solomarketing.com.cn",
           "generationTimeoutMs": 600000
         }
       }
@@ -147,7 +147,7 @@ If OpenClaw CLI configuration is available, the following config keys can also b
 
 ```bash
 openclaw config set plugins.generator-kv.apiKey YOUR_API_KEY
-openclaw config set plugins.generator-kv.baseUrl https://api.kv.solomarketing.com.cn
+openclaw config set plugins.generator-kv.baseUrl https://kv.solomarketing.com.cn
 openclaw config set plugins.generator-kv.generationTimeoutMs 600000
 ```
 
@@ -329,6 +329,45 @@ prompt: 科技感强、深色背景、体现供应链展会主视觉
 posterQuality: 2K
 posterSize: ["16:9"]
 ```
+
+### Error Handling & Auto-Recovery
+
+When calling `POST /api/v1/generateKV`, if the server returns an error, the response body follows this structure:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "GENERATION_ENCODING_ERROR",
+    "message": "...",
+    "details": {
+      "fieldName": "activityName",
+      "reason": "...",
+      "suggestion": "...",
+      "rejectedValue": null
+    }
+  }
+}
+```
+
+The model must automatically recover based on `error.code` and retry, instead of showing the raw error to the user.
+
+| Error Code | Meaning | Auto-Recovery Action |
+|---|---|---|
+| `GENERATION_ENCODING_ERROR` | Non-UTF-8 bytes in request body | Convert the value of the field indicated by `fieldName` to UTF-8, ensure `Content-Type: application/json; charset=utf-8`, then retry |
+| `GENERATION_JSON_PARSE_ERROR` | Invalid JSON format | Inspect request body JSON syntax, quotes, and field types, then retry |
+| `GENERATION_FIELD_REQUIRED` | Required field missing | Prompt the user for the field indicated by `fieldName`, then retry |
+| `GENERATION_FIELD_TOO_LONG` | Field value too long | Shorten the field indicated by `fieldName` to within its limit, then retry |
+| `INVALID_MODEL` | Invalid `modelId` | Call `GET /api/v1/models?type=all` to refresh the model list, let the user pick a valid model, then retry |
+| `QUOTA_EXCEEDED` | Daily quota exhausted | Stop retrying; inform the user that the daily quota is used up and suggest retrying the next day or contacting the admin |
+| `UNAUTHORIZED` | Invalid `x-api-key` | Stop retrying; guide the user to check or reconfigure the API Key |
+| `INTERNAL_ERROR` | Server internal error | Retry up to 2 times; if still failing, report to the user and stop |
+
+Auto-recovery principles:
+- Always read `error.details.suggestion` first and follow it.
+- After fixing, call `POST /api/v1/generateKV` again with the same `x-api-key`.
+- Do not modify `x-api-key` or other valid fields.
+- If auto-recovery fails twice in a row, stop and clearly inform the user.
 
 ## Troubleshooting
 
